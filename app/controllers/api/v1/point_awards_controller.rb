@@ -1,4 +1,6 @@
 class Api::V1::PointAwardsController < Api::V1::BaseController
+  skip_before_action :verify_authenticity_token
+
   before_action :log_info, :require_token, :require_admin, :load_posse, :validate_amount
 
   def log_info
