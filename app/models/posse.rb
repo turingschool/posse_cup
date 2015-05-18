@@ -4,4 +4,9 @@ class Posse < ActiveRecord::Base
   def current_score
     point_awards.pluck(:amount).reduce(:+)
   end
+
+  def as_json(options = {})
+    o = options.merge(methods: [:current_score], except: [:created_at, :updated_at])
+    super(o)
+  end
 end
