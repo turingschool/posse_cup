@@ -5,3 +5,20 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+["Alan Kay",
+ "Tim Berners-Lee",
+ "Fred Brooks",
+ "Donald Knuth",
+ "Ada Lovelace",
+ "Grace Hopper",
+ "James Golick",
+ "Weirich",
+ "Adele Goldberg",
+ "Dennis Ritchie",
+ "Ezra Zygmuntowicz",
+ "Yukihiro Matsumoto"].each do |pname|
+  unless Posse.find_by(name: name)
+    Posse.create(name: pname)
+  end
+end
