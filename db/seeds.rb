@@ -18,7 +18,7 @@
  "Dennis Ritchie",
  "Ezra Zygmuntowicz",
  "Yukihiro Matsumoto"].each do |pname|
-  unless Posse.find_by(name: name)
+  unless Posse.find_by(name: pname)
     Posse.create(name: pname)
   end
 end

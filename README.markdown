@@ -14,6 +14,10 @@ Turing staff members. Points will be awarded by staff members via slack using th
 format `#PC <num points> to <posse name>`, e.g., `#PC 30 points to Pizza`. Point awards
 will be tallied by the Posse Cup application, and displayed on the leaderboard.
 
+### Current Standings
+
+[https://possecup.herokuapp.com/api/v1/posses](https://possecup.herokuapp.com/api/v1/posses)
+
 ### What can you win?
 
 Inestimable honor! Undying Glory! Exemption from posse cleaning duty! It's impossible
