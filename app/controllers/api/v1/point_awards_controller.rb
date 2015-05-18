@@ -35,6 +35,6 @@ class Api::V1::PointAwardsController < Api::V1::BaseController
   end
 
   def admin_uids
-    ["1234"]
+    {"U02MYKGQB" => "Horace"}.keys
   end
 end
