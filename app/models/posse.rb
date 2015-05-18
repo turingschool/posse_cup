@@ -2,7 +2,7 @@ class Posse < ActiveRecord::Base
   has_many :point_awards
 
   def current_score
-    point_awards.pluck(:amount).reduce(:+)
+    point_awards.pluck(:amount).reduce(0, :+)
   end
 
   def as_json(options = {})
