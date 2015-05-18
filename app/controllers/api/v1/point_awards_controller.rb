@@ -1,5 +1,12 @@
 class Api::V1::PointAwardsController < Api::V1::BaseController
-  before_action :require_token, :require_admin, :load_posse, :validate_amount
+  before_action :log_info, :require_token, :require_admin, :load_posse, :validate_amount
+
+  def log_info
+    10.times { Rails.logger.info("*************************")}
+    Rails.logger.info("Got award req with params #{params}")
+    Rails.logger.info("Got award req with headers #{request.headers}")
+    10.times { Rails.logger.info("*************************")}
+  end
 
   def create
     pa = @posse.point_awards.new(amount: @amount)
