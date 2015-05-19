@@ -1,6 +1,6 @@
 class Commands::AwardPoints < Commands::Base
   include ActionView::Helpers::TextHelper
-  
+
   def response
     error_message || point_award
   end
@@ -54,7 +54,7 @@ class Commands::AwardPoints < Commands::Base
   end
 
   def point_award
-    pa = posse.point_awards.new(amount: amount)
+    pa = posse.point_awards.new(amount: amount, creator: admins[uid])
     if pa.save
       {"json" => {"status" => "success", "current_score" => posse.current_score, "text" => success_message},
           "status" => 200}

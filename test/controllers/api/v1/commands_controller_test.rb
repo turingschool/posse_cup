@@ -37,6 +37,13 @@ class Api::V1::CommandsControllerTest < ActionController::TestCase
     assert_match "30 points awarded to Von Neumann posse! Current score: 30.", JSON.parse(@response.body)["text"]
   end
 
+  test "it attributes new point award based on the instructor who assigned it" do
+    post :create, token: "pizza", user_id: @admin_uid, text: "#PC 30 points to Von Neumann"
+    assert_response 200
+    assert_match "30 points awarded to Von Neumann posse! Current score: 30.", JSON.parse(@response.body)["text"]
+    assert_equal Commands::Base.new("").admins[@admin_uid], PointAward.last.creator
+  end
+
   test "it returns standings" do
     Posse.first.point_awards.create(amount: 15)
     post :create, text: "#pc standings"

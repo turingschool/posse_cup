@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518000210) do
+ActiveRecord::Schema.define(version: 20150519194706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20150518000210) do
     t.integer  "posse_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "creator"
   end
 
   add_index "point_awards", ["posse_id"], name: "index_point_awards_on_posse_id", using: :btree
@@ -31,5 +32,4 @@ ActiveRecord::Schema.define(version: 20150518000210) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "point_awards", "posses"
 end
