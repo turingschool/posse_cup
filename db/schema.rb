@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150518000210) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "point_awards", force: :cascade do |t|
     t.integer  "amount"
     t.integer  "posse_id"
@@ -20,7 +23,7 @@ ActiveRecord::Schema.define(version: 20150518000210) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "point_awards", ["posse_id"], name: "index_point_awards_on_posse_id"
+  add_index "point_awards", ["posse_id"], name: "index_point_awards_on_posse_id", using: :btree
 
   create_table "posses", force: :cascade do |t|
     t.string   "name"
@@ -28,4 +31,5 @@ ActiveRecord::Schema.define(version: 20150518000210) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "point_awards", "posses"
 end
