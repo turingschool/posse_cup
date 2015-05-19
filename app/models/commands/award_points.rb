@@ -17,8 +17,16 @@ class Commands::AwardPoints < Commands::Base
     @posse ||= Posse.find_by(name: posse_name)
   end
 
+  def message_parts
+    Hash[[:award, :reason].zip(text.split(" for "))]
+  end
+
+  def reason
+    message_parts[:reason]
+  end
+
   def posse_name
-    (text.to_s.match(/to (.*$)/) || [])[1]
+    message_parts[:award].split(" to ")[1]
   end
 
   def amount
@@ -54,7 +62,7 @@ class Commands::AwardPoints < Commands::Base
   end
 
   def point_award
-    pa = posse.point_awards.new(amount: amount, creator: admins[uid])
+    pa = posse.point_awards.new(amount: amount, creator: admins[uid], reason: reason)
     if pa.save
       {"json" => {"status" => "success", "current_score" => posse.current_score, "text" => success_message},
           "status" => 200}
