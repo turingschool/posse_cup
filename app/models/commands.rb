@@ -2,7 +2,7 @@
 module Commands
   def self.parse(message_text, options={})
     case message_text
-    when /(#pc|#PC) (-?\w+) points/
+    when /(#pc|#PC) (-?\w+) point/
       Commands::AwardPoints.new(message_text, options)
     when /(#pc|#PC) standings/
       Commands::Standings.new(message_text, options)

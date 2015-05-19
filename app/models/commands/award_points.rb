@@ -1,4 +1,6 @@
 class Commands::AwardPoints < Commands::Base
+  include ActionView::Helpers::TextHelper
+  
   def response
     error_message || point_award
   end
@@ -63,6 +65,6 @@ class Commands::AwardPoints < Commands::Base
   end
 
   def success_message
-    "#{amount} points awarded to #{posse.name} posse! Current score: #{posse.current_score}."
+    "#{pluralize(amount, 'point')} awarded to #{posse.name} posse! Current score: #{posse.current_score}."
   end
 end

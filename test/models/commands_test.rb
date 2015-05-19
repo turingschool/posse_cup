@@ -47,6 +47,16 @@ class CommandsTest < ActiveSupport::TestCase
     assert_equal 30, p.current_score
   end
 
+  test "it adds new singular point award for valid awards" do
+    p = Posse.create(name: "Von Neumann")
+    resp = Commands.parse("#pc 1 point to Von Neumann",
+                          token: ENV["SLACK_AUTH_TOKEN"],
+                          user_id: @admin_uid).response
+    assert_equal "1 point awarded to Von Neumann posse! Current score: 1.", resp["json"]["text"]
+    assert_equal 200, resp["status"]
+    assert_equal 1, p.current_score
+  end
+
   test "it returns 200 status for any user_id on standings request" do
     assert_equal 200, Commands.parse("#pc standings").response["status"]
   end
