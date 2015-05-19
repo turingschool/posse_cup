@@ -25,7 +25,10 @@ to truly assess the privileges accorded to the winners of the posse cup. After a
 
 ### Feature Wishlist
 
-* positive/negative input parsing (`30 points from Posse`) instead of `-30`
-* Display current leaderboard via command `#PC leaderboard`
+* Attribution of point awards by instructor (probably based on UID -> name map in Commands::Base)
+* Attribution of point awards by reason using optional "for" syntax, e.g. `30 points to Staff for exceptional brafery and good looks`. But non-attributed still needs to work
+* HTML "leaderboard" endpoint to allow viewing of current standings
+* HTML "log" for viewing history of attributions by posse (maybe also global log?)
 * Display list of posses via command, or in response to invalid posse name errors
 * HTML UI for showing leaderboard directly from browser
+* positive/negative input parsing (`30 points from Posse`) instead of `-30`
