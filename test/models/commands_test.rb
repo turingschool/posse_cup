@@ -61,6 +61,11 @@ class CommandsTest < ActiveSupport::TestCase
     assert_equal 200, Commands.parse("#pc standings").response["status"]
   end
 
+  test "it is case-insensitive for #pc trigger" do
+    assert_equal 200, Commands.parse("#pc standings").response["status"]
+    assert_equal 200, Commands.parse("#PC standings").response["status"]
+  end
+
   test "it calculates standings message" do
     p = Posse.create(name: "Von Neumann")
     p.point_awards.create(amount: 10)
