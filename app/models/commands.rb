@@ -2,12 +2,12 @@
 module Commands
   def self.parse(message_text, options={})
     case message_text
-    when /#pc \d+/
-      Commands::AwardPoints.new(message_text, options).response
-    when /#pc standings/
-      Commands::Standings.new(message_text, options).response
+    when /(#pc|#PC) (-?\w+) points/
+      Commands::AwardPoints.new(message_text, options)
+    when /(#pc|#PC) standings/
+      Commands::Standings.new(message_text, options)
     else
-      Commands::Invalid.new(message_text, options).response
+      Commands::Invalid.new(message_text, options)
     end
   end
 end
