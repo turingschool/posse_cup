@@ -1,5 +1,6 @@
 class Posse < ActiveRecord::Base
   has_many :point_awards
+  has_many :students
 
   def current_score
     point_awards.pluck(:amount).reduce(0, :+)
