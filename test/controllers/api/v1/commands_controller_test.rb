@@ -62,19 +62,29 @@ class Api::V1::CommandsControllerTest < ActionController::TestCase
   test "it can assign points to appropriate posse using a student name" do
     p = Posse.first
     s = Student.create(name: "Student", slack_uid: "1234", posse: p, slack_name: "stoodent")
-    post :create, token: "pizza", user_id: @admin_uid, text: "#PC 30 points to @stoodent"
+    post :create, token: "pizza", user_id: @admin_uid, text: "#PC 30 points to <@1234>"
     assert_response 200
     assert_match "30 points awarded to #{p.name} posse! Current score: 30.", JSON.parse(@response.body)["text"]
     assert_equal 30, p.current_score
   end
 
   test "it can assign points with reason to appropriate posse using a student name" do
+    # format is: "#pc 1 point to <@U044EKRGP> for testing the posse cup"
     p = Posse.first
     s = Student.create(name: "Student", slack_uid: "1234", posse: p, slack_name: "stoodent")
-    post :create, token: "pizza", user_id: @admin_uid, text: "#PC 30 points to @stoodent for pizza"
+    post :create, token: "pizza", user_id: @admin_uid, text: "#PC 30 points to <@1234> for pizza"
     assert_response 200
     assert_match "30 points awarded to #{p.name} posse! Current score: 30.", JSON.parse(@response.body)["text"]
     assert_equal 30, p.current_score
     assert_equal "pizza", PointAward.last.reason
+  end
+
+  test "it can returns error for invalid at-mention" do
+    # format is: "#pc 1 point to <@U044EKRGP> for testing the posse cup"
+    p = Posse.first
+    s = Student.create(name: "Student", slack_uid: "1234", posse: p, slack_name: "stoodent")
+    post :create, token: "pizza", user_id: @admin_uid, text: "#PC 30 points to <@5678> for pizza"
+    assert_response 200
+    assert_match "Sorry, posse <@5678> could not be", JSON.parse(@response.body)["text"]
   end
 end

@@ -82,8 +82,8 @@ class CommandsTest < ActiveSupport::TestCase
 
   test "it adds new point award when a student is at-mentioned" do
     p = Posse.create(name: "Von Neumann")
-    s = Student.create(name: "hi", slack_name: "hi", posse: p)
-    resp = Commands.parse("#pc 30 points to @hi",
+    s = Student.create(name: "hi", slack_name: "hi", posse: p, slack_uid: "1234")
+    resp = Commands.parse("#pc 30 points to <@1234>",
                           token: ENV["SLACK_AUTH_TOKEN"],
                           user_id: @admin_uid).response
     assert_equal "30 points awarded to Von Neumann posse! Current score: 30.", resp["json"]["text"]

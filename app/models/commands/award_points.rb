@@ -14,8 +14,8 @@ class Commands::AwardPoints < Commands::Base
   end
 
   def posse
-    if posse_name.to_s.start_with?("@")
-      Student.find_by(slack_name: posse_name[1..-1]).try(:posse)
+    if posse_name.to_s.start_with?("<@")
+      Student.find_by(slack_uid: posse_name.match(/<@(.+)>/)[1]).try(:posse)
     else
       Posse.find_by(name: posse_name)
     end
