@@ -1,0 +1,11 @@
+<h1>Current Posse Listings</h1>
+
+<% Posse.all.each do |p| %>
+<h3><%= p.name %></h3>
+<ul>
+  <% p.students.each do |s| %>
+  <li><%= s.name %></li>
+  <% end %>
+</ul>
+
+<% end %>

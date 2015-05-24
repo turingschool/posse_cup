@@ -1,0 +1,2 @@
+class PossesController < ApplicationController
+end
