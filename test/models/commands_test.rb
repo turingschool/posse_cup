@@ -79,4 +79,15 @@ class CommandsTest < ActiveSupport::TestCase
     p2.point_awards.create(amount: 10)
     assert_equal "1st (tie): Von Neumann, Pizza (10 points)", Commands.parse("#pc standings").response["json"]["text"]
   end
+
+  test "it adds new point award when a student is at-mentioned" do
+    p = Posse.create(name: "Von Neumann")
+    s = Student.create(name: "hi", slack_name: "hi", posse: p)
+    resp = Commands.parse("#pc 30 points to @hi",
+                          token: ENV["SLACK_AUTH_TOKEN"],
+                          user_id: @admin_uid).response
+    assert_equal "30 points awarded to Von Neumann posse! Current score: 30.", resp["json"]["text"]
+    assert_equal 200, resp["status"]
+    assert_equal 30, p.current_score
+  end
 end

@@ -14,7 +14,11 @@ class Commands::AwardPoints < Commands::Base
   end
 
   def posse
-    @posse ||= Posse.find_by(name: posse_name)
+    if posse_name.to_s.start_with?("@")
+      Student.find_by(slack_name: posse_name[1..-1]).try(:posse)
+    else
+      Posse.find_by(name: posse_name)
+    end
   end
 
   def message_parts

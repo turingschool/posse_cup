@@ -58,4 +58,23 @@ class Api::V1::CommandsControllerTest < ActionController::TestCase
     assert_equal "cleaning toilets", PointAward.last.reason
     assert_equal "Horace", PointAward.last.creator
   end
+
+  test "it can assign points to appropriate posse using a student name" do
+    p = Posse.first
+    s = Student.create(name: "Student", slack_uid: "1234", posse: p, slack_name: "stoodent")
+    post :create, token: "pizza", user_id: @admin_uid, text: "#PC 30 points to @stoodent"
+    assert_response 200
+    assert_match "30 points awarded to #{p.name} posse! Current score: 30.", JSON.parse(@response.body)["text"]
+    assert_equal 30, p.current_score
+  end
+
+  test "it can assign points with reason to appropriate posse using a student name" do
+    p = Posse.first
+    s = Student.create(name: "Student", slack_uid: "1234", posse: p, slack_name: "stoodent")
+    post :create, token: "pizza", user_id: @admin_uid, text: "#PC 30 points to @stoodent for pizza"
+    assert_response 200
+    assert_match "30 points awarded to #{p.name} posse! Current score: 30.", JSON.parse(@response.body)["text"]
+    assert_equal 30, p.current_score
+    assert_equal "pizza", PointAward.last.reason
+  end
 end
