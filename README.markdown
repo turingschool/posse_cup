@@ -16,7 +16,7 @@ will be tallied by the Posse Cup application, and displayed on the leaderboard.
 
 ### Current Standings
 
-[https://possecup.herokuapp.com/api/v1/posses](https://possecup.herokuapp.com/api/v1/posses)
+[https://possecup.herokuapp.com/](https://possecup.herokuapp.com/)
 
 ### What can you win?
 
@@ -27,7 +27,7 @@ to truly assess the privileges accorded to the winners of the posse cup. After a
 
 * Attribution of point awards by instructor (probably based on UID -> name map in Commands::Base)
 * Attribution of point awards by reason using optional "for" syntax, e.g. `30 points to Staff for exceptional brafery and good looks`. But non-attributed still needs to work
-* HTML "leaderboard" endpoint to allow viewing of current standings
+* ~~HTML "leaderboard" endpoint to allow viewing of current standings~~
 * HTML "log" for viewing history of attributions by posse (maybe also global log?)
 * Display list of posses via command, or in response to invalid posse name errors
 * HTML UI for showing leaderboard directly from browser
