@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150825142707) do
+ActiveRecord::Schema.define(version: 20151006220455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cups", force: :cascade do |t|
+    t.integer  "posse_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "point_awards", force: :cascade do |t|
     t.integer  "amount"
@@ -24,8 +30,10 @@ ActiveRecord::Schema.define(version: 20150825142707) do
     t.string   "creator"
     t.string   "reason"
     t.datetime "archived_at"
+    t.integer  "cup_id"
   end
 
+  add_index "point_awards", ["cup_id"], name: "index_point_awards_on_cup_id", using: :btree
   add_index "point_awards", ["posse_id"], name: "index_point_awards_on_posse_id", using: :btree
 
   create_table "posses", force: :cascade do |t|

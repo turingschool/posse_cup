@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: "standings#index"
   resources :posses, only: [:index]
+  resources :cups, only: [:index]
   get "/login", to: redirect("/auth/slack"), as: :login
   get "/logout", to: "sessions#destroy", as: :logout
   get "/auth/slack/callback" => "sessions#create"
@@ -13,6 +14,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :students
-    resources :posses
+    resources :cups, only: [:new, :create]
   end
 end

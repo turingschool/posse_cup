@@ -1,0 +1,10 @@
+<h1>Viewing Past Posse Cups!</h1>
+
+<ul>
+<% @cups.each do |c| %>
+<li>
+  <h3>Winner: <%= c.posse.name %><h3>
+  <p>Cup concluded on: <%= c.created_at.strftime("%m/%d/%Y") %></p>
+</li>
+<% end %>
+</ul>
