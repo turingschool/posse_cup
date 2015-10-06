@@ -1,4 +1,4 @@
-<%= form_for [:admin, @student] do |f| %>
+<%= form_for [:admin, student] do |f| %>
 <%= f.label "Name" %>
 <%= f.text_field "name" %>
 <%= f.label "Slack ID" %>
@@ -8,7 +8,11 @@
 <%= f.label "Posse" %>
 <select name="student[posse_id]">
   <% Posse.all.each do |posse| %>
-    <option value="<%= posse.id %>"><%= posse.name %></option>
+    <% if student.posse_id && posse.id == student.posse_id %>
+      <option selected value="<%= posse.id %>"><%= posse.name %></option>
+     <% else %>
+      <option value="<%= posse.id %>"><%= posse.name %></option>
+    <% end %>
   <% end %>
 </select>
 
