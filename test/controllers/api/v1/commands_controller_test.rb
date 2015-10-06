@@ -5,7 +5,7 @@ class Api::V1::CommandsControllerTest < ActionController::TestCase
   def setup
     ENV["SLACK_AUTH_TOKEN"] = "pizza"
     Posse.create(name: "Von Neumann")
-    @admin_uid = Commands::Base.new("").admins.keys.first
+    @admin_uid = Auth.admins.keys.first
   end
 
   test "rejects point assignment requests without proper token" do
@@ -42,7 +42,7 @@ class Api::V1::CommandsControllerTest < ActionController::TestCase
     post :create, token: "pizza", user_id: @admin_uid, text: "#PC 30 points to Von Neumann"
     assert_response 200
     assert_match "30 points awarded to Von Neumann posse! Current score: 30.", JSON.parse(@response.body)["text"]
-    assert_equal Commands::Base.new("").admins[@admin_uid], PointAward.last.creator
+    assert_equal Auth.admins[@admin_uid], PointAward.last.creator
   end
 
   test "it returns standings" do
