@@ -18,5 +18,9 @@
 <p><%= link_to "Admin Login", login_path %></p>
 <% end %>
 
+<% if admin? %>
+<p><%= link_to "Manage Students", admin_students_path %></p>
+<% end %>
+
 </body>
 </html>
