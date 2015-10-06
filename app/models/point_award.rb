@@ -5,10 +5,6 @@ class PointAward < ActiveRecord::Base
 
   default_scope { (where cup_id: nil) }
 
-  def self.archive_all!
-    update_all(archived_at: Time.now)
-  end
-
   def self.in_current_round
     where(cup_id: nil)
   end

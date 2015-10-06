@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006220455) do
+ActiveRecord::Schema.define(version: 20151006224628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +25,10 @@ ActiveRecord::Schema.define(version: 20151006220455) do
   create_table "point_awards", force: :cascade do |t|
     t.integer  "amount"
     t.integer  "posse_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "creator"
     t.string   "reason"
-    t.datetime "archived_at"
     t.integer  "cup_id"
   end
 
