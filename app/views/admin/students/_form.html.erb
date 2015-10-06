@@ -1,0 +1,16 @@
+<%= form_for [:admin, @student] do |f| %>
+<%= f.label "Name" %>
+<%= f.text_field "name" %>
+<%= f.label "Slack ID" %>
+<%= f.text_field "slack_uid" %>
+<%= f.label "Slack Name" %>
+<%= f.text_field "slack_name" %>
+<%= f.label "Posse" %>
+<select name="student[posse_id]">
+  <% Posse.all.each do |posse| %>
+    <option value="<%= posse.id %>"><%= posse.name %></option>
+  <% end %>
+</select>
+
+<%= f.submit %>
+<% end %>

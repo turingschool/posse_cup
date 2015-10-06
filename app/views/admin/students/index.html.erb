@@ -1,0 +1,23 @@
+<h1>Posse Cup Students</h1>
+
+<h3><%= link_to "New Student", new_admin_student_path %></h3>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Slack ID</th>
+    <th>Slack Name</th>
+    <th>Posse</th>
+    <th>Edit</th>
+  </tr>
+
+  <% @students.each do |s| %>
+  <tr>
+    <td>Name: <%= s.name %></td>
+    <td>Slack ID: <%= s.slack_uid %></td>
+    <td>Posse: <%= s.posse.name if s.posse %></td>
+    <td>Slack Name: <%= s.slack_name %></td>
+    <td><%= link_to "Edit", edit_admin_student_path(s) %></td>
+  </tr>
+  <% end %>
+
+</table>

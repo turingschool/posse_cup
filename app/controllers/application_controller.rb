@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def admin?
-    logged_in? && Auth.admin?(current_user["user_id"])
+    logged_in? && Auth.admin_uid?(current_user["user_id"])
   end
 
   helper_method :current_user, :logged_in?, :admin?

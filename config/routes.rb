@@ -10,4 +10,9 @@ Rails.application.routes.draw do
       resources :posses, only: [:index]
     end
   end
+
+  namespace :admin do
+    resources :students
+    resources :posses
+  end
 end
