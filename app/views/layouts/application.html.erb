@@ -10,5 +10,13 @@
 
 <%= yield %>
 
+
+<% if logged_in? %>
+<p>Welcome, <%= current_user["name"] %></p>
+<p><%= link_to "Logout", logout_path %></p>
+<% else %>
+<p><%= link_to "Admin Login", login_path %></p>
+<% end %>
+
 </body>
 </html>
