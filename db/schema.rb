@@ -52,5 +52,6 @@ ActiveRecord::Schema.define(version: 20151006224628) do
 
   add_index "students", ["posse_id"], name: "index_students_on_posse_id", using: :btree
 
+  add_foreign_key "point_awards", "posses"
   add_foreign_key "students", "posses"
 end

@@ -42,3 +42,11 @@ Commands are sent via slack by prefixing a message with `#pc`.
 e.g `#pc 10 points to Weirich` or `#pc 10 points to @dj`. Optionally takes a "for" option
 to indicate what the award is for: `#pc 10 points to @dj for straight trollin`
 * add student - adds a new student record to a posse. `#pc add student Horace Williams (@horace) to James Golick`
+
+### Data Import
+
+Import new posse members using:
+
+`rake posses:import`
+
+(Requires `SLACK_ADMIN_TOKEN` ENV variable to be set with a valid slack api token).
