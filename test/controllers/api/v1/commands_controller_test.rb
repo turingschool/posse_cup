@@ -5,7 +5,8 @@ class Api::V1::CommandsControllerTest < ActionController::TestCase
   def setup
     ENV["SLACK_AUTH_TOKEN"] = "pizza"
     Posse.create(name: "Von Neumann")
-    @admin_uid = Auth.admins.keys.first
+    @admin_uid = "U1234"
+    Slackk.stubs(:member).with(@admin_uid).returns({"name" => "horace", "is_admin" => true})
   end
 
   test "rejects point assignment requests without proper token" do
@@ -14,6 +15,7 @@ class Api::V1::CommandsControllerTest < ActionController::TestCase
   end
 
   test "rejects request from non-whitelisted user" do
+    Slackk.stubs(:member).with("4567").returns({"name" => "student", "is_admin" => false})
     post :create, text: "#pc 30 points to Von Neumann", token: "pizza", user_id: "4567"
     assert_response 401
     assert_equal "User not authorized.", JSON.parse(@response.body)["error"]
@@ -42,7 +44,7 @@ class Api::V1::CommandsControllerTest < ActionController::TestCase
     post :create, token: "pizza", user_id: @admin_uid, text: "#PC 30 points to Von Neumann"
     assert_response 200
     assert_match "30 points awarded to Von Neumann posse! Current score: 30.", JSON.parse(@response.body)["text"]
-    assert_equal Auth.admins[@admin_uid], PointAward.last.creator
+    assert_equal "horace", PointAward.last.creator
   end
 
   test "it returns standings" do
@@ -56,7 +58,7 @@ class Api::V1::CommandsControllerTest < ActionController::TestCase
     assert_response 200
     assert_match "30 points awarded to Von Neumann posse! Current score: 30.", JSON.parse(@response.body)["text"]
     assert_equal "cleaning toilets", PointAward.last.reason
-    assert_equal "Horace", PointAward.last.creator
+    assert_equal "horace", PointAward.last.creator
   end
 
   test "it can assign points to appropriate posse using a student name" do

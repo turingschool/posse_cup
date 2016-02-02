@@ -65,8 +65,12 @@ class Commands::AwardPoints < Commands::Base
     { "json" => {"error" => "Invalid Token."}, "status" => 401 }
   end
 
+  def creator_name
+    Slackk.member(uid)["name"]
+  end
+
   def point_award
-    pa = posse.point_awards.new(amount: amount, creator: Auth.admins[uid], reason: reason)
+    pa = posse.point_awards.new(amount: amount, creator: creator_name, reason: reason)
     if pa.save
       {"json" => {"status" => "success", "current_score" => posse.current_score, "text" => success_message},
           "status" => 200}

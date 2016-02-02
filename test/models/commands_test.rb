@@ -4,6 +4,7 @@ class CommandsTest < ActiveSupport::TestCase
   def setup
     ENV["SLACK_AUTH_TOKEN"] = "pizza"
     @admin_uid = "U02MYKGQB"
+    Slackk.stubs(:member).with(@admin_uid).returns({"name" => "horace", "is_admin" => true})
   end
 
   test "it returns 401 status for invalid token on point award request" do
@@ -15,6 +16,7 @@ class CommandsTest < ActiveSupport::TestCase
   end
 
   test "it returns 401 on award without admin uid" do
+    Slackk.stubs(:member).with("invalid").returns(nil)
     resp = Commands.parse("#pc 30 points to Von Neumann",
                           token: ENV["SLACK_AUTH_TOKEN"],
                           user_id: "invalid").response["status"]
