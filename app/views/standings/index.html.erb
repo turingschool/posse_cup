@@ -1,9 +1,29 @@
-<h1>Posse Cup Standings</h1>
+<div class="container">
+  <h1>Posse Cup Standings</h1>
 
-<ul>
-<% @standings.each do |s| %>
-<li>
-  <%= s %>
-</li>
-<% end %>
-</ul>
+  <ul>
+    <% @standings.each do |s| %>
+    <li>
+      <%= s %>
+    </li>
+    <% end %>
+  </ul>
+
+
+  <div>
+    <h3>How it works</h3>
+
+    <p>For generations, students at the Turing School of Software and Design have
+      striven against their peers in a ceaseless battle of wits, strength, and nerves.
+      Its very name, whispered in the catacombs of Blake St., brings wistful looks to the
+      eyes of seasoned veterans, and sets the teeth of novices to chattering.
+      The character of the strong will be revealed, the resolve of the weak shaken, for among
+      the field of mighty contenders, their can only be one... <strong>POSSE CUP CHAMPION</strong>.
+    </p>
+
+    <p>Cup points are awarded for arbitrary reasons and in arbitrary amounts at the discretion of
+      Turing staff members. Points will be awarded by staff members via slack using the message
+      format <code>#pc &lt;num points&gt; to &lt;@student-name&gt;</code>, e.g., <code>#pc 30 points to @horace</code>. Point awards
+      will be tallied by the Posse Cup application, and displayed on the leaderboard.</p>
+  </div>
+</div>
